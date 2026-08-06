@@ -1,0 +1,30 @@
+# --- Go ---
+arowana
+arowana.exe
+/bin/
+*.exe
+*.test
+*.prof
+coverage.out
+coverage.html
+
+# --- Frontend ---
+node_modules/
+web/dist/
+web/.vite/
+*.local
+
+# --- Editors / OS ---
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# --- Env ---
+.env
+.env.*
+!.env.example
+
+# --- Hooks ---
+lefthook-local.yml

@@ -1,0 +1,10 @@
+# Regenerate with: go tool tygo generate
+packages:
+  - path: "github.com/Arash1Kazemi/arowana/internal/graph"
+    output_path: "web/src/types/graph.ts"
+
+  # Uncomment once these packages contain real .go files (tygo errors on empty packages)
+  # - path: "github.com/Arash1Kazemi/arowana/internal/explore"
+  #   output_path: "web/src/types/explore.ts"
+  # - path: "github.com/Arash1Kazemi/arowana/internal/gitlog"
+  #   output_path: "web/src/types/gitlog.ts"
