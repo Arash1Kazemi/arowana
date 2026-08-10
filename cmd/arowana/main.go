@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 )
 
@@ -33,7 +35,18 @@ func printUsage() {
 	fmt.Println("Usage: arowana <gitlog|explore|both> [repo-path]")
 }
 
-// Stubs for now — Milestone 1 fills in runExplore first.
-func runGitlog(repoPath string)  { fmt.Println("gitlog: not implemented yet —", repoPath) }
-func runExplore(repoPath string) { fmt.Println("explore: not implemented yet —", repoPath) }
-func runBoth(repoPath string)    { fmt.Println("both: not implemented yet —", repoPath) }
+// Temporary — just enough to prove the Vite proxy reaches the Go server.
+// Real endpoints land later .
+func runExplore(repoPath string) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("GET /api/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"status":"ok","repo":"` + repoPath + `"}`))
+	})
+	log.Println("explore server listening on :8080 —", repoPath)
+	log.Fatal(http.ListenAndServe(":8080", mux))
+}
+
+// Stubs for now.
+func runGitlog(repoPath string) { fmt.Println("gitlog: not implemented yet —", repoPath) }
+func runBoth(repoPath string)   { fmt.Println("both: not implemented yet —", repoPath) }
