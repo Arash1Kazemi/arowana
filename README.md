@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/assets/logo.png" width="180" alt="Arowana logo"></p>
+<p align="center"><img src="docs/assets/logo.png" width="420" alt="Arowana logo"></p>
 
 # Arowana
 
