@@ -4,27 +4,27 @@ package explore
 
 import (
 	"fmt"
-
+	// can read a folder of Go code and hand back a fully-understood picture of it
 	"golang.org/x/tools/go/packages"
 )
 
 // Load loads and type-checks every package in the Go module rooted at dir.
 // It uses go/packages, which wraps the real Go compiler's parser and type
-// checker, so the result is compiler-accurate rather than guessed.
+// checker, so the result is compiler-accurate.
 
 // A syntax error in one file does not fail the whole load — it's recorded
 // on that package's Errors field instead. Use HasErrors to check.
 func Load(dir string) ([]*packages.Package, error) {
 	cfg := &packages.Config{
 		Dir: dir,
-		Mode: packages.NeedName |
-			packages.NeedFiles |
-			packages.NeedCompiledGoFiles |
-			packages.NeedImports |
-			packages.NeedDeps |
-			packages.NeedTypes |
-			packages.NeedTypesInfo |
-			packages.NeedSyntax,
+		Mode: packages.NeedName | // what is this package called?
+			packages.NeedFiles | // which files are in this package?
+			packages.NeedCompiledGoFiles | // which files are actually compiled? but only the real .go source files (not generated files)
+			packages.NeedImports | // what other packages does this package import?
+			packages.NeedDeps | // go load information about those other packages, not just list their names
+			packages.NeedTypes | // run the real type-checker on it
+			packages.NeedTypesInfo | // extra detail connecting each specific piece of code to the type the checker resolved for it
+			packages.NeedSyntax, // for future update: walking through function bodies to find function calls
 	}
 
 	pkgs, err := packages.Load(cfg, "./...")
