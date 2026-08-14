@@ -1,18 +1,14 @@
-package storage
+package shapes
 
-// BaseRepository provides shared scaffolding that concrete repositories
-// embed to avoid repeating connection-handling code.
-type BaseRepository struct {
-	table string
+type Circle struct {
+	Radius float64
 }
 
-func (r BaseRepository) TableName() string {
-	return r.table
+func (c Circle) Area() float64 {
+	return 3.14159 * c.Radius * c.Radius
 }
 
-// UserRepository embeds BaseRepository, so it inherits TableName() for
-// free — this is the relationship the embeds edge kind needs to capture.
-type UserRepository struct {
-	BaseRepository
-	CacheEnabled bool
+type ColoredCircle struct {
+	Circle
+	Color string
 }
